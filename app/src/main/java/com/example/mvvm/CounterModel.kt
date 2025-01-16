@@ -4,7 +4,7 @@ class CounterModel {
 
     private var count = 0
 
-    fun increment{
+    fun increment(){
         count++
     }
 
