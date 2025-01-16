@@ -1,21 +1,27 @@
 package com.example.mvvm
 
+import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 
-class MainViewModel: ViewModel() {
+class MainViewModel : ViewModel() {
 
     private val model = CounterModel()
-    val counterData = MutableLiveData<Int>()
 
+    private val _counterData = MutableLiveData<Int>()
+    val counterData: LiveData<Int> get() = _counterData
 
-    fun onIncrement(){
+    fun onIncrement() {
         model.increment()
-        counterData.value = model.getResult()
+        updateCounter()
     }
 
-    fun onDecrement(){
+    fun onDecrement() {
         model.decrement()
-        counterData.value = model.getResult()
+        updateCounter()
+    }
+
+    private fun updateCounter() {
+        _counterData.value = model.getResult()
     }
 }
